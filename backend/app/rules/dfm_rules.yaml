@@ -1,0 +1,90 @@
+rules:
+  - id: DFM-01
+    name: Fastener Standardization
+    area: dfm
+    severity: warn
+    check_type: bom_fastener_diversity
+    description: "Check if the BOM uses more than 3 unique bolt metric thread diameters."
+    pass_note: "Fastener variety is well-consolidated, simplifying assembly tools."
+    warn_note: "Excessive fastener sizes detected in BOM. Consolidate to standard M3, M4, or M5 threads to reduce assembly tool changes and inventory cost."
+
+  - id: DFM-02
+    name: Off-The-Shelf Component Ratio
+    area: dfm
+    severity: warn
+    check_type: cots_ratio
+    description: "Ensure at least 70% of parts in early prototype are commercial off-the-shelf (COTS)."
+    pass_note: "High proportion of off-the-shelf standard parts keeps initial prototype cycle fast and affordable."
+    warn_note: "Design relies heavily on custom fabricated components. Replace non-critical custom brackets with standard extrusion joints or sheet metal bends."
+
+  - id: DFM-03
+    name: High-Current Wire Gauge Sufficiency
+    area: dfm
+    severity: fail
+    check_type: wire_gauge
+    description: "Verify that drive motors (>15A) are paired with 14 AWG or heavier silicone cabling."
+    pass_note: "High-current motor and battery distribution wiring meets thermal safety requirements."
+    fail_note: "High-current motors detected without sufficient heavy-gauge wire (14 AWG or heavier) specified in the BOM. Risk of wire overheating."
+
+  - id: DFM-04
+    name: Modular Subsystem Disassembly
+    area: dfm
+    severity: info
+    check_type: modular_disconnect
+    description: "Check if quick disconnect connectors (e.g. Anderson or XT60) are included for field serviceable modules."
+    pass_note: "Modular high-current quick disconnects detected, enabling rapid field battery swaps and subsystem replacement."
+    warn_note: "Consider adding quick-disconnect connectors between battery, motor drivers, and chassis to enable easy field maintenance."
+
+  - id: DFM-05
+    name: Enclosure Ingress Protection (IP Rating)
+    area: dfm
+    severity: warn
+    check_type: outdoor_ingress
+    description: "Outdoor agricultural robotics must specify IP65 or higher rated enclosure boxes and cable glands."
+    pass_note: "Weatherproof IP65+ enclosure and sealed cable glands present for agricultural dust/spray protection."
+    warn_note: "Outdoor operational environment requires IP65 enclosure and cable glands to prevent mud, moisture, and chemical vapor penetration."
+
+  - id: DFM-06
+    name: Vibration Loosening Prevention
+    area: dfm
+    severity: warn
+    check_type: vibration_damping
+    description: "Rough terrain ground vehicles must incorporate threadlockers, nylon lock nuts, or rubber isolation dampers."
+    pass_note: "Vibration dampening rubber mounts or threadlocker included to withstand ground vibration."
+    warn_note: "Add medium threadlocker (blue) or nylon-insert locknuts to prevent fastener loosening under repetitive farm soil vibration."
+
+  - id: DFM-07
+    name: Motor Shaft Radial Load Decoupling
+    area: dfm
+    severity: warn
+    check_type: pillow_block_bearings
+    description: "Heavy direct-drive wheels (>10kg rover) must use pillow block bearings to support axle load rather than gearbox bearings alone."
+    pass_note: "External pillow block bearings relieve motor internal gearbox from carrying rover deadweight."
+    warn_note: "Directly mounting wheels onto motor gearbox shafts without external bearing supports can cause premature gearbox failure on uneven terrain."
+
+  - id: DFM-08
+    name: Computational Thermal Dissipation
+    area: dfm
+    severity: warn
+    check_type: compute_cooling
+    description: "Enclosed SBCs running continuous computer vision (e.g. Jetson or Raspberry Pi 4/5) require heatsinks or sealed cooling fans."
+    pass_note: "Active cooling or heatsink specified for onboard vision processing compute module."
+    warn_note: "Compute module operates inside a sealed IP enclosure; ensure heatsink or internal circulation fan is specified to avoid thermal throttling under direct sunlight."
+
+  - id: DFM-09
+    name: Structural Extrusion Thickness
+    area: dfm
+    severity: info
+    check_type: frame_rigidity
+    description: "Chassis beams longer than 500mm should use 2040 or reinforced profiles rather than plain 2020 to prevent sagging."
+    pass_note: "Chassis structural rails provide adequate cross-sectional stiffness."
+    warn_note: "Long spans constructed from single 2020 extrusion may flex under payload. Consider 2040 profile or diagonal bracing."
+
+  - id: DFM-10
+    name: Chemical Plumbing Corrosion Compatibility
+    area: dfm
+    severity: warn
+    check_type: chemical_plumbing
+    description: "Liquid spray payloads must use chemical-resistant tubing (PU/Teflon), brass/polypropylene fittings, and anti-drip check valves."
+    pass_note: "Chemical-grade tubing and brass/nylon fluid components specified for herbicide resistance."
+    warn_note: "Ensure spray lines and pump seals are rated for agricultural surfactant compatibility to avoid seal degradation."

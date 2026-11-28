@@ -1,0 +1,36 @@
+categories:
+  - id: SAFE-MED-01
+    name: Medical Devices & Diagnostics
+    keywords: ["medical", "patient", "clinical", "diagnostic", "implant", "ventilator", "infusion pump", "surgical", "health monitoring"]
+    warning: "Design involves human medical or diagnostic applications. Strict regulatory approval (e.g., CDSCO, FDA, CE-MDR) and biomedical safety standards (IEC 60601) are mandatory before physical prototyping."
+    forced_status: "not assessed: requires qualified engineer"
+
+  - id: SAFE-AUTO-01
+    name: Automotive & Road Vehicles
+    keywords: ["automotive", "road vehicle", "passenger car", "highway", "brake controller", "drive-by-wire", "steering actuator", "ev powertrain"]
+    warning: "Design interfaces with public road vehicles or passenger automotive systems. Strict functional safety compliance (ISO 26262) and AIS motor vehicle homologation standards apply."
+    forced_status: "not assessed: requires qualified engineer"
+
+  - id: SAFE-HIGHVOLT-01
+    name: High-Voltage Mains Power Equipment
+    keywords: ["mains voltage", "220v ac", "440v", "grid-tied inverter", "high voltage", "substation", "switchgear", "ac mains power supply"]
+    warning: "System operates at lethal AC mains or high DC voltages (>60V DC / >50V AC RMS). Galvanic isolation, creepage/clearance verification, and testing to IEC 62368 / IS 13252 are essential."
+    forced_status: "not assessed: requires qualified engineer"
+
+  - id: SAFE-PRESS-01
+    name: Pressurized Vessels & Explosives
+    keywords: ["pressure vessel", "compressed air tank", "boiler", "hydraulic accumulator", "explosive", "ammunition", "pyrotechnic", "flammable gas"]
+    warning: "System contains high pressure storage or hazardous energetic materials. ASME Boiler & Pressure Vessel code / PESO approval required."
+    forced_status: "not assessed: requires qualified engineer"
+
+  - id: SAFE-CHEM-01
+    name: Regulated Hazardous Chemicals
+    keywords: ["toxic gas", "carcinogen", "pesticide synthesis", "chemical synthesis", "radioactive", "biohazard", "corrosive acid"]
+    warning: "Involves hazardous or controlled chemical handling requiring environmental pollution control board (CPCB) consent and certified containment."
+    forced_status: "not assessed: requires qualified engineer"
+
+  - id: SAFE-CHILD-01
+    name: Children's Products & Toys
+    keywords: ["infant", "toddler", "child toy", "baby monitor", "crib", "children product"]
+    warning: "Products intended for children require rigorous compliance with toy safety regulations (BIS IS 9873 / EN 71) regarding small parts, toxic pigments, and choke hazards."
+    forced_status: "not assessed: requires qualified engineer"

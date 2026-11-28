@@ -1,0 +1,90 @@
+rules:
+  - id: READ-01
+    name: Hardware Emergency Stop Mechanism
+    area: readiness
+    severity: fail
+    check_type: estop_present
+    description: "Autonomous field machinery must include an accessible, hardwired red emergency stop push button."
+    pass_note: "Physical red mushroom E-stop button included in hardware circuit to immediately cut actuator power."
+    fail_note: "No physical emergency stop button found in BOM. Field prototypes must have hardwired power isolation for operator safety."
+
+  - id: READ-02
+    name: Overcurrent & Short-Circuit Fusing
+    area: readiness
+    severity: fail
+    check_type: fuse_block_present
+    description: "Every independent power rail (propulsion, logic, payload) must have automotive blade fuses."
+    pass_note: "Dedicated multi-way fuse block included in power distribution system."
+    fail_note: "Missing circuit fuse protection in BOM. Lithium and lead-acid batteries pose severe fire hazard without individual branch fusing."
+
+  - id: READ-03
+    name: Battery Chemistry & BMS Protection
+    area: readiness
+    severity: fail
+    check_type: bms_present
+    description: "Lithium-based battery systems must explicitly integrate a certified Battery Management System (BMS)."
+    pass_note: "Integrated or dedicated BMS specified for cell balancing, overcharge, and over-discharge cutoff."
+    fail_note: "Lithium battery detected without dedicated BMS protection. Untrapped cell imbalance can cause thermal runaway."
+
+  - id: READ-04
+    name: Battery Transport & DG Compliance Awareness
+    area: readiness
+    severity: needs_expert
+    check_type: battery_transport
+    description: "Lithium battery packs (>100Wh) require UN 38.3 transport testing certification for air or commercial courier shipping in India."
+    pass_note: "Battery pack capacity requires UN 38.3 compliance when shipping assembled units via logistics partners."
+    warn_note: "High-capacity battery (>100Wh) falls under Dangerous Goods class 9 shipping regulations. Source batteries domestically from certified vendors."
+
+  - id: READ-05
+    name: Wireless RF Module Equipment Type Approval (ETA)
+    area: readiness
+    severity: warn
+    check_type: rf_compliance
+    description: "Telemetry and LoRa modules operating in India must conform to WPC (Wireless Planning & Coordination) de-licensed frequency bands (e.g. 865-867 MHz or 2.4 GHz)."
+    pass_note: "RF wireless modules should use WPC approved modules (e.g., ESP32 / pre-certified LoRa transceivers)."
+    warn_note: "Verify that LoRa module frequency is set to Indian ISM band (865-867 MHz) rather than 915 MHz (US) to avoid regulatory violation."
+
+  - id: READ-06
+    name: Autonomous Motion Visual/Audible Warning Beacon
+    area: readiness
+    severity: warn
+    check_type: beacon_and_buzzer
+    description: "Unmanned ground vehicles operating in farm environments should feature a flashing amber strobe and audio buzzer."
+    pass_note: "Strobe warning light or audio buzzer included for farm worker awareness during autonomous traversal."
+    warn_note: "Consider adding an amber flashing strobe or audible alarm to alert nearby agricultural workers when rover motors are energized."
+
+  - id: READ-07
+    name: Master Battery Isolation Switch
+    area: readiness
+    severity: warn
+    check_type: isolator_switch
+    description: "A mechanical master disconnect switch should isolate the battery during maintenance, storage, or transport."
+    pass_note: "Physical battery master isolation switch included in BOM."
+    warn_note: "Include a heavy-duty rotary battery isolator switch to prevent parasitic drain and enable safe maintenance."
+
+  - id: READ-08
+    name: Single-Source Component Risk Review
+    area: readiness
+    severity: needs_expert
+    check_type: single_source_parts
+    description: "Identify specialized components (RTK GNSS, custom LiDAR) that may face supplier lead time volatility."
+    pass_note: "Critical navigation components identified; ensure secondary pin-compatible suppliers are scouted."
+    warn_note: "High-accuracy RTK module is single-sourced. Recommend identifying fallback multi-constellation GNSS providers."
+
+  - id: READ-09
+    name: Electronic Control Optical Isolation
+    area: readiness
+    severity: warn
+    check_type: galvanic_isolation
+    description: "Inductive loads (high torque motors, pumps, solenoids) must be optically isolated from the microcontroller."
+    pass_note: "Optocoupled motor drivers and relay boards isolate sensitive microcontroller GPIO from inductive flyback voltage."
+    warn_note: "Ensure high-current motor driver inputs and relay boards feature optical isolation to prevent MCU reset during inductive surges."
+
+  - id: READ-10
+    name: Low-Voltage Logic Level Compatibility
+    area: readiness
+    severity: info
+    check_type: logic_level_matching
+    description: "Ensure 3.3V logic devices (ESP32, Raspberry Pi) are not directly connected to 5V UART/I2C signals without level shifters."
+    pass_note: "Logic levels between 3.3V controllers and 5V sensors/drivers must be matched or level-shifted."
+    warn_note: "Verify that 5V sensors interfacing with 3.3V microcontrollers include resistor dividers or bi-directional level shifters."
